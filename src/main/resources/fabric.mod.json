@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "bettersculksensor",
+  "version": "${version}",
+  "name": "BetterSculkSensor",
+  "description": "This mod brings us the sculk sensor we all wanted. Credits to Purplers (purpledragonnuke)",
+  "authors": [
+    "Galster"
+  ],
+  "contact": {
+    "website": "https://youtu.be/LpKZS_8IZsw"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/bettersculk/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ru.galster.bettersculksensor.SculkModInitializer"
+    ],
+    "client": [
+      "ru.galster.bettersculksensor.client.ClientSculkModInitializer"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "bettersculk:block/better_sculk_sensor",
+  "textures": {
+    "tendrils": "bettersculk:block/better_sculk_sensor_tendril_inactive"
+  }
+}

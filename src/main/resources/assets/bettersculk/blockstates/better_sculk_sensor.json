@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "sculk_sensor_phase=active": {
+      "model": "bettersculk:block/better_sculk_sensor_active"
+    },
+    "sculk_sensor_phase=cooldown": {
+      "model": "bettersculk:block/better_sculk_sensor_active"
+    },
+    "sculk_sensor_phase=inactive": {
+      "model": "bettersculk:block/better_sculk_sensor_inactive"
+    }
+  }
+}
