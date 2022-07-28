@@ -41,7 +41,7 @@ public class BetterVibrationListener extends VibrationListener {
 
     @Override
     public void tick(World world) {
-//        world.createAndScheduleBlockTick(blockEntity.getPos(), blockEntity.getCachedState().getBlock(), 1);
+
     }
 
     @Override

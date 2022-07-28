@@ -116,6 +116,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         assert blockEntity != null;
         blockEntity.setClickedItem(itemInHand.getDefaultStack());
         blockEntity.setShouldRenderFlat(actualNewVibration.shouldRenderFlat());
+        blockEntity.setAngle(actualNewVibration.getRotateDegree());
 
         state = state.with(VIBRATION_EVENT, actualNewVibration);
         world.setBlockState(pos, state, 3);
@@ -291,14 +292,14 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         SWIM(GameEvent.SWIM, false, Items.CONDUIT),
         ELYTRA_GLIDE(GameEvent.ELYTRA_GLIDE, true, Items.ELYTRA),
         HIT_GROUND(GameEvent.HIT_GROUND, false, Items.ANVIL, Items.CHIPPED_ANVIL, Items.DAMAGED_ANVIL, Items.SAND, Items.GRAVEL, Items.BLACK_CONCRETE_POWDER, Items.BLUE_CONCRETE_POWDER, Items.BROWN_CONCRETE_POWDER, Items.BROWN_CONCRETE_POWDER, Items.CYAN_CONCRETE_POWDER, Items.GRAY_CONCRETE_POWDER, Items.GREEN_CONCRETE_POWDER, Items.LIME_CONCRETE_POWDER, Items.MAGENTA_CONCRETE_POWDER, Items.ORANGE_CONCRETE_POWDER, Items.PINK_CONCRETE_POWDER, Items.PURPLE_CONCRETE_POWDER, Items.RED_CONCRETE_POWDER, Items.YELLOW_CONCRETE_POWDER, Items.LIGHT_BLUE_CONCRETE_POWDER, Items.LIGHT_GRAY_CONCRETE_POWDER),
-        TELEPORT(GameEvent.TELEPORT, false, Items.ENDER_PEARL),
-        SPLASH(GameEvent.SPLASH, false, Items.SPLASH_POTION),
-        ENTITY_SHAKE(GameEvent.ENTITY_SHAKE, true, Items.BLACK_CARPET, Items.BLUE_CARPET, Items.CYAN_CARPET, Items.BROWN_CARPET, Items.GRAY_CARPET, Items.GREEN_CARPET, Items.LIGHT_BLUE_CARPET, Items.LIGHT_GRAY_CARPET, Items.LIME_CARPET, Items.MAGENTA_CARPET, Items.MOSS_CARPET, Items.ORANGE_CARPET, Items.PINK_CARPET, Items.PURPLE_CARPET, Items.RED_CARPET, Items.WHITE_CARPET, Items.YELLOW_CARPET),
+        TELEPORT(GameEvent.TELEPORT, true, Items.ENDER_PEARL),
+        SPLASH(GameEvent.SPLASH, true, Items.SPLASH_POTION),
+        ENTITY_SHAKE(GameEvent.ENTITY_SHAKE, false, Items.BLACK_CARPET, Items.BLUE_CARPET, Items.CYAN_CARPET, Items.BROWN_CARPET, Items.GRAY_CARPET, Items.GREEN_CARPET, Items.LIGHT_BLUE_CARPET, Items.LIGHT_GRAY_CARPET, Items.LIME_CARPET, Items.MAGENTA_CARPET, Items.MOSS_CARPET, Items.ORANGE_CARPET, Items.PINK_CARPET, Items.PURPLE_CARPET, Items.RED_CARPET, Items.WHITE_CARPET, Items.YELLOW_CARPET),
         BLOCK_CHANGE(GameEvent.BLOCK_CHANGE, false, Items.OBSERVER),
         NOTE_BLOCK_PLAY(GameEvent.NOTE_BLOCK_PLAY, false, Items.NOTE_BLOCK),
         PROJECTILE_SHOOT(GameEvent.PROJECTILE_SHOOT, true, Items.BOW),
         DRINK(GameEvent.DRINK, true, Items.GLASS_BOTTLE),
-        PRIME_FUSE(GameEvent.PRIME_FUSE, false, Items.TNT),
+        PRIME_FUSE(GameEvent.PRIME_FUSE, false, Items.FLINT_AND_STEEL),
         PROJECTILE_LAND(GameEvent.PROJECTILE_LAND, true, Items.ARROW),
         EAT(GameEvent.EAT, true, Items.APPLE),
         ENTITY_INTERACT(GameEvent.ENTITY_INTERACT, true, Items.SADDLE),
@@ -309,7 +310,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         BLOCK_CLOSE(GameEvent.BLOCK_CLOSE, false, Items.DARK_OAK_TRAPDOOR, Items.ACACIA_TRAPDOOR, Items.BIRCH_TRAPDOOR, Items.CRIMSON_TRAPDOOR, Items.IRON_TRAPDOOR, Items.JUNGLE_TRAPDOOR, Items.MANGROVE_TRAPDOOR, Items.OAK_TRAPDOOR, Items.SPRUCE_TRAPDOOR, Items.WARPED_TRAPDOOR),
         BLOCK_DEACTIVATE(GameEvent.BLOCK_DEACTIVATE, true, Items.REDSTONE_LAMP),
         BLOCK_DETACH(GameEvent.BLOCK_DETACH, true, Items.STRING),
-        DISPENSE_FAIL(GameEvent.DISPENSE_FAIL, false, Items.DISPENSER),
+        DISPENSE_FAIL(GameEvent.DISPENSE_FAIL, false, 0, Items.DISPENSER),
         BLOCK_OPEN(GameEvent.BLOCK_OPEN, true, Items.DARK_OAK_DOOR, Items.ACACIA_DOOR, Items.BIRCH_DOOR, Items.CRIMSON_DOOR, Items.IRON_DOOR, Items.JUNGLE_DOOR, Items.MANGROVE_DOOR, Items.OAK_DOOR, Items.SPRUCE_DOOR, Items.WARPED_DOOR),
         BLOCK_ACTIVATE(GameEvent.BLOCK_ACTIVATE, false, Items.POLISHED_BLACKSTONE_PRESSURE_PLATE, Items.ACACIA_PRESSURE_PLATE, Items.BIRCH_PRESSURE_PLATE, Items.CRIMSON_PRESSURE_PLATE, Items.DARK_OAK_PRESSURE_PLATE, Items.HEAVY_WEIGHTED_PRESSURE_PLATE, Items.JUNGLE_PRESSURE_PLATE, Items.LIGHT_WEIGHTED_PRESSURE_PLATE, Items.MANGROVE_PRESSURE_PLATE, Items.OAK_PRESSURE_PLATE, Items.SPRUCE_PRESSURE_PLATE, Items.STONE_PRESSURE_PLATE, Items.WARPED_PRESSURE_PLATE),
         BLOCK_ATTACH(GameEvent.BLOCK_ATTACH, true, Items.TRIPWIRE_HOOK),
@@ -323,9 +324,9 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         CONTAINER_CLOSE(GameEvent.CONTAINER_CLOSE, false, Items.BARREL),
         PISTON_CONTRACT(GameEvent.PISTON_CONTRACT, false, Items.STICKY_PISTON),
         PISTON_EXTEND(GameEvent.PISTON_EXTEND, false, Items.PISTON),
-        CONTAINER_OPEN(GameEvent.CONTAINER_OPEN, false, Items.CHEST),
+        CONTAINER_OPEN(GameEvent.CONTAINER_OPEN, false, 0, Items.CHEST),
         ITEM_INTERACT_START(GameEvent.ITEM_INTERACT_START, true, Items.GLOW_ITEM_FRAME),
-        EXPLODE(GameEvent.EXPLODE, true, Items.GUNPOWDER),
+        EXPLODE(GameEvent.EXPLODE, true, Items.TNT),
         LIGHTNING_STRIKE(GameEvent.LIGHTNING_STRIKE, false, Items.LIGHTNING_ROD),
         INSTRUMENT_PLAY(GameEvent.INSTRUMENT_PLAY, true, Items.GOAT_HORN);
 
@@ -333,6 +334,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         @Nullable
         private final GameEvent gameEvent;
         private final boolean renderFlat;
+        private final int rotateDegree;
 
         public List<Item> getConfigureItems() {
             return this.configureItems;
@@ -341,13 +343,18 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         public boolean shouldRenderFlat() {
             return renderFlat;
         }
+        
         BetterVibration(GameEvent gameEvent, boolean renderFlat, Item... configureItems) {
-            this(gameEvent, renderFlat, Arrays.stream(configureItems).toList());
+            this(gameEvent, renderFlat, 180, configureItems); // purple asked me to make items point north
         }
-        BetterVibration(@Nullable GameEvent gameEvent, boolean renderFlat, List<Item> configureItems) {
+        BetterVibration(GameEvent gameEvent, boolean renderFlat, int rotateDegree, Item... configureItems) {
+            this(gameEvent, renderFlat, rotateDegree, Arrays.stream(configureItems).toList());
+        }
+        BetterVibration(@Nullable GameEvent gameEvent, boolean renderFlat, int rotateDegree, List<Item> configureItems) {
             this.gameEvent = gameEvent;
             this.configureItems = configureItems;
             this.renderFlat = renderFlat;
+            this.rotateDegree = rotateDegree;
         }
 
         @Override
@@ -357,6 +364,10 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
             }
 
             return this.gameEvent.getId();
+        }
+
+        public int getRotateDegree() {
+            return rotateDegree;
         }
     }
 }

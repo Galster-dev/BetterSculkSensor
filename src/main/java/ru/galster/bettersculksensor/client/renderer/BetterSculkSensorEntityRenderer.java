@@ -25,7 +25,7 @@ public class BetterSculkSensorEntityRenderer implements BlockEntityRenderer<Bett
         if(entity.shouldRenderFlat()) {
             matrices.translate(0.5, 0.5, 0.5);
             matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90));
-            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180)); // purple asked to make flat items point north
+            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(entity.getAngle()));
         } else {
             matrices.translate(0.5, 0.625, 0.5);
         }

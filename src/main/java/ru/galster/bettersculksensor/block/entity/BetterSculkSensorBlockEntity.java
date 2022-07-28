@@ -29,6 +29,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
     @Nullable
     private ItemStack clickedItem;
     private boolean shouldRenderFlat;
+    private int angle;
 
     public BetterSculkSensorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.BETTER_SCULK_SENSOR_BLOCK_ENTITY, pos, state);
@@ -53,6 +54,14 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
 
     public void setShouldRenderFlat(boolean shouldRenderFlat) {
         this.shouldRenderFlat = shouldRenderFlat;
+    }
+
+    public int getAngle() {
+        return angle;
+    }
+
+    public void setAngle(int angle) {
+        this.angle = angle;
     }
 
     @Override
@@ -106,6 +115,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
         }
 
         this.shouldRenderFlat = nbt.getBoolean("flat");
+        this.angle = nbt.getInt("additional_angle");
 
         // my IDEA cries about it possibly being null IDK what's it talking about
         if(this.world == null) {
@@ -120,6 +130,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
     protected void writeNbt(NbtCompound nbt) {
         nbt.putString("vibration_event", this.getCachedState().get(VIBRATION_EVENT).asString());
         nbt.putBoolean("flat", this.shouldRenderFlat);
+        nbt.putInt("additional_angle", this.angle);
 
         if(this.clickedItem != null) {
             ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, this.clickedItem)
