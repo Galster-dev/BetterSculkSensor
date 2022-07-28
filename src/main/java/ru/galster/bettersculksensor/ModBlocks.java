@@ -9,9 +9,9 @@ import ru.galster.bettersculksensor.block.entity.BetterSculkSensorBlockEntity;
 
 public class ModBlocks {
     public static final BetterSculkSensorBlock BETTER_SCULK_SENSOR_BLOCK = new BetterSculkSensorBlock(
-            FabricBlockSettings.of(Material.AMETHYST)       // the whole point of purple blocks is not being a fan of purple
-                    .strength(1.5f)                         // in 1.17 snapshots Mojang had textures of so called "calibrated sculk sensor"
-                    .sounds(BlockSoundGroup.AMETHYST_BLOCK) // and it's actually just a piece of amethyst block
+            FabricBlockSettings.of(Material.SCULK)
+                    .strength(1.5f)
+                    .sounds(BlockSoundGroup.SCULK_SENSOR)
                     .luminance(1),
             8
     );

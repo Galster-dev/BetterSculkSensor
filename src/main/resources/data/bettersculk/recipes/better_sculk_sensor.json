@@ -1,19 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "CCC",
-    "CSC",
-    "AAA"
+    " R ",
+    "RSR",
+    " R "
   ],
   "key": {
-    "C": {
-      "item": "minecraft:amethyst_shard"
-    },
     "S": {
       "item": "minecraft:sculk_sensor"
     },
-    "A": {
-      "item": "minecraft:amethyst_block"
+    "R": {
+      "item": "minecraft:redstone"
     }
   },
   "result": {
