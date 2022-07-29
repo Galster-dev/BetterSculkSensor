@@ -102,9 +102,9 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         }
 
         var itemInHand = player.getStackInHand(hand).getItem();
-        // find a vibration that can be configured with clicked item
+        // find a vibration that can be calibrated with clicked item
         var newVibration = Arrays.stream(VIBRATIONS)
-                .filter(v -> v.getConfigureItems().contains(itemInHand))
+                .filter(v -> v.getCalibrateItems().contains(itemInHand))
                 .findFirst();
 
         if(newVibration.isEmpty()) {
@@ -330,29 +330,29 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         LIGHTNING_STRIKE(GameEvent.LIGHTNING_STRIKE, false, Items.LIGHTNING_ROD),
         INSTRUMENT_PLAY(GameEvent.INSTRUMENT_PLAY, true, Items.GOAT_HORN);
 
-        private final List<Item> configureItems;
+        private final List<Item> calibrateItems;
         @Nullable
         private final GameEvent gameEvent;
         private final boolean renderFlat;
         private final int rotateDegree;
 
-        public List<Item> getConfigureItems() {
-            return this.configureItems;
+        public List<Item> getCalibrateItems() {
+            return this.calibrateItems;
         }
 
         public boolean shouldRenderFlat() {
             return renderFlat;
         }
         
-        BetterVibration(GameEvent gameEvent, boolean renderFlat, Item... configureItems) {
-            this(gameEvent, renderFlat, 180, configureItems); // purple asked me to make items point north
+        BetterVibration(GameEvent gameEvent, boolean renderFlat, Item... calibrateItems) {
+            this(gameEvent, renderFlat, 180, calibrateItems); // purple asked me to make items point north
         }
-        BetterVibration(GameEvent gameEvent, boolean renderFlat, int rotateDegree, Item... configureItems) {
-            this(gameEvent, renderFlat, rotateDegree, Arrays.stream(configureItems).toList());
+        BetterVibration(GameEvent gameEvent, boolean renderFlat, int rotateDegree, Item... calibrateItems) {
+            this(gameEvent, renderFlat, rotateDegree, Arrays.stream(calibrateItems).toList());
         }
-        BetterVibration(@Nullable GameEvent gameEvent, boolean renderFlat, int rotateDegree, List<Item> configureItems) {
+        BetterVibration(@Nullable GameEvent gameEvent, boolean renderFlat, int rotateDegree, List<Item> calibrateItems) {
             this.gameEvent = gameEvent;
-            this.configureItems = configureItems;
+            this.calibrateItems = calibrateItems;
             this.renderFlat = renderFlat;
             this.rotateDegree = rotateDegree;
         }
