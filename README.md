@@ -1,6 +1,6 @@
 # BetterSculkSensor
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/bettersculksensor) <br>
 The sensor we all wanted. Inspired by [Purplers](https://www.youtube.com/c/Purplers) ([video](https://youtu.be/LpKZS_8IZsw))
-
 [![Requires Fabric API](https://i.imgur.com/Ol1Tcf8.png)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 ## Features
