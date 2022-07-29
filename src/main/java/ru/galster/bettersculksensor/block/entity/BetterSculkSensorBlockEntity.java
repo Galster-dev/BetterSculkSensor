@@ -115,7 +115,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
         }
 
         this.shouldRenderFlat = nbt.getBoolean("flat");
-        this.angle = nbt.getInt("additional_angle");
+        this.angle = nbt.getInt("angle");
 
         // my IDEA cries about it possibly being null IDK what's it talking about
         if(this.world == null) {
@@ -130,7 +130,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
     protected void writeNbt(NbtCompound nbt) {
         nbt.putString("vibration_event", this.getCachedState().get(VIBRATION_EVENT).asString());
         nbt.putBoolean("flat", this.shouldRenderFlat);
-        nbt.putInt("additional_angle", this.angle);
+        nbt.putInt("angle", this.angle);
 
         if(this.clickedItem != null) {
             ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, this.clickedItem)

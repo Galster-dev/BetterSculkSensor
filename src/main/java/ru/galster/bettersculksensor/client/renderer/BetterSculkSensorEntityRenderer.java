@@ -28,6 +28,7 @@ public class BetterSculkSensorEntityRenderer implements BlockEntityRenderer<Bett
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(entity.getAngle()));
         } else {
             matrices.translate(0.5, 0.625, 0.5);
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(entity.getAngle()));
         }
 
         // Scale item because fixed mode is too big
