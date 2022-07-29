@@ -295,7 +295,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         TELEPORT(GameEvent.TELEPORT, true, Items.ENDER_PEARL),
         SPLASH(GameEvent.SPLASH, true, Items.SPLASH_POTION),
         ENTITY_SHAKE(GameEvent.ENTITY_SHAKE, false, Items.BLACK_CARPET, Items.BLUE_CARPET, Items.CYAN_CARPET, Items.BROWN_CARPET, Items.GRAY_CARPET, Items.GREEN_CARPET, Items.LIGHT_BLUE_CARPET, Items.LIGHT_GRAY_CARPET, Items.LIME_CARPET, Items.MAGENTA_CARPET, Items.MOSS_CARPET, Items.ORANGE_CARPET, Items.PINK_CARPET, Items.PURPLE_CARPET, Items.RED_CARPET, Items.WHITE_CARPET, Items.YELLOW_CARPET),
-        BLOCK_CHANGE(GameEvent.BLOCK_CHANGE, false, Items.OBSERVER),
+        BLOCK_CHANGE(GameEvent.BLOCK_CHANGE, false, 0, Items.OBSERVER), // did you know that powering side is front? Same
         NOTE_BLOCK_PLAY(GameEvent.NOTE_BLOCK_PLAY, false, Items.NOTE_BLOCK),
         PROJECTILE_SHOOT(GameEvent.PROJECTILE_SHOOT, true, Items.BOW),
         DRINK(GameEvent.DRINK, true, Items.GLASS_BOTTLE),
