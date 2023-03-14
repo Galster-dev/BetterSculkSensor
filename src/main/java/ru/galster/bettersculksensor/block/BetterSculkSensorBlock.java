@@ -132,7 +132,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
         switch (getPhase(state)) {
             case ACTIVE -> {
                 world.setBlockState(pos, state.with(SCULK_SENSOR_PHASE, SculkSensorPhase.COOLDOWN).with(POWER, 0), 3);
-                world.createAndScheduleBlockTick(pos, state.getBlock(), COOLDOWN);
+                world.scheduleBlockTick(pos, state.getBlock(), COOLDOWN);
                 if (!state.get(WATERLOGGED)) {
                     world.playSound(null, pos, SoundEvents.BLOCK_SCULK_SENSOR_CLICKING_STOP, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.2F + 0.8F);
                 }
@@ -202,7 +202,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -215,7 +215,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
                 world.setBlockState(pos, state.with(POWER, 0), 18);
             }
 
-            world.createAndScheduleBlockTick(new BlockPos(pos), state.getBlock(), 1);
+            world.scheduleBlockTick(new BlockPos(pos), state.getBlock(), 1);
         }
     }
 
@@ -268,7 +268,7 @@ public class BetterSculkSensorBlock extends BlockWithEntity implements Waterlogg
 
     public static void setActive(@Nullable Entity entity, World world, BlockPos pos, BlockState state, int power) {
         world.setBlockState(pos, state.with(SCULK_SENSOR_PHASE, SculkSensorPhase.ACTIVE).with(POWER, power), 3);
-        world.createAndScheduleBlockTick(pos, state.getBlock(), PULSE_LENGTH);
+        world.scheduleBlockTick(pos, state.getBlock(), PULSE_LENGTH);
         updateNeighbors(world, pos);
         world.emitGameEvent(entity, GameEvent.SCULK_SENSOR_TENDRILS_CLICKING, pos);
 

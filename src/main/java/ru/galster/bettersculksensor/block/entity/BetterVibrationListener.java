@@ -3,8 +3,8 @@ package ru.galster.bettersculksensor.block.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.VibrationParticleEffect;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -22,8 +22,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class BetterVibrationListener extends VibrationListener {
-    public BetterVibrationListener(int range, Callback callback, @Nullable VibrationListener.Vibration vibration, float distance, int delay, BetterSculkSensorBlockEntity blockEntity) {
-        super(null, range, callback, vibration, distance, delay);
+    public BetterVibrationListener(int range, Callback callback, BetterSculkSensorBlockEntity blockEntity) {
+        super(null, range, callback);
         this.blockEntity = blockEntity;
     }
 
@@ -33,7 +33,7 @@ public class BetterVibrationListener extends VibrationListener {
     public void actualTick(World world) {
         if (world instanceof ServerWorld serverWorld) {
             if (this.vibration != null) {
-                this.callback.accept(serverWorld, this, new BlockPos(this.vibration.pos), this.vibration.gameEvent, this.vibration.getEntity(serverWorld).orElse(null), this.vibration.getOwner(serverWorld).orElse(null), this.distance);
+                this.callback.accept(serverWorld, this, new BlockPos(this.vibration.pos), this.vibration.gameEvent, this.vibration.getEntity(serverWorld).orElse(null), this.vibration.getOwner(serverWorld).orElse(null), this.getRange());
                 this.vibration = null;
             }
         }
@@ -50,38 +50,35 @@ public class BetterVibrationListener extends VibrationListener {
     }
 
     @Override
-    public boolean listen(ServerWorld world, GameEvent.Message event) {
-        GameEvent.Emitter emitter;
+    public boolean listen(ServerWorld world, GameEvent event, GameEvent.Emitter emitter, Vec3d emmiterPos) {
         if (this.vibration != null) {
             return false;
         }
-        GameEvent gameEvent = event.getEvent();
-        if (!this.callback.canAccept(gameEvent, emitter = event.getEmitter())) {
+        if (!this.callback.canAccept(event, emitter)) {
             return false;
         }
         Optional<Vec3d> optional = this.getPositionSource().getPos(world);
         if (optional.isEmpty()) {
             return false;
         }
-        Vec3d vec3d = event.getEmitterPos();
         Vec3d vec3d2 = optional.get();
-        if (!this.callback.accepts(world, this, new BlockPos(vec3d), gameEvent, emitter)) {
+        if (!this.callback.accepts(world, this, new BlockPos(emmiterPos), event, emitter)) {
             return false;
         }
-        if (isOccluded(world, vec3d, vec3d2)) {
+        if (isOccluded(world, emmiterPos, vec3d2)) {
             return false;
         }
-        this.listen(world, gameEvent, emitter, vec3d, vec3d2);
+        this.listen(world, event, emitter, emmiterPos, vec3d2);
         return true;
     }
 
     private void listen(ServerWorld world, GameEvent gameEvent, GameEvent.Emitter emitter, Vec3d start, Vec3d end) {
-        this.distance = (float)start.distanceTo(end);
-        this.vibration = new Vibration(gameEvent, this.distance, start, emitter.sourceEntity());
-        this.delay = MathHelper.floor(this.distance);
+        var distance = (float)start.distanceTo(end);
+        this.vibration = new Vibration(gameEvent, distance, start, emitter.sourceEntity());
+        this.delay = MathHelper.floor(distance);
         world.spawnParticles(new VibrationParticleEffect(this.getPositionSource(), this.delay), start.x, start.y, start.z, 1, 0.0, 0.0, 0.0, 0.0);
         var blockPos = this.blockEntity.getPos();
-        world.createAndScheduleBlockTick(blockPos, world.getBlockState(blockPos).getBlock(), this.delay);
+        world.scheduleBlockTick(blockPos, world.getBlockState(blockPos).getBlock(), this.delay);
         this.callback.onListen();
     }
 

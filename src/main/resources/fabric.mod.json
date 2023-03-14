@@ -10,7 +10,7 @@
   "contact": {
     "website": "https://youtu.be/LpKZS_8IZsw"
   },
-  "license": "All-Rights-Reserved",
+  "license": "LGPL-3.0",
   "icon": "assets/bettersculk/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -23,8 +23,8 @@
   },
   "mixins": [],
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": ">=0.14.17",
     "fabric": "*",
-    "minecraft": ">=1.19"
+    "minecraft": "1.19.3"
   }
 }

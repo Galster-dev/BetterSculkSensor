@@ -7,7 +7,7 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import ru.galster.bettersculksensor.block.entity.BetterSculkSensorBlockEntity;
 
 public class BetterSculkSensorEntityRenderer implements BlockEntityRenderer<BetterSculkSensorBlockEntity> {
@@ -24,11 +24,11 @@ public class BetterSculkSensorEntityRenderer implements BlockEntityRenderer<Bett
 
         if(entity.shouldRenderFlat()) {
             matrices.translate(0.5, 0.5, 0.5);
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90));
-            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(entity.getAngle()));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(entity.getAngle()));
         } else {
             matrices.translate(0.5, 0.625, 0.5);
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(entity.getAngle()));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getAngle()));
         }
 
         // Scale item because fixed mode is too big

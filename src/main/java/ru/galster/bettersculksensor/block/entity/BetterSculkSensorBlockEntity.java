@@ -33,7 +33,7 @@ public class BetterSculkSensorBlockEntity extends BlockEntity implements Vibrati
 
     public BetterSculkSensorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.BETTER_SCULK_SENSOR_BLOCK_ENTITY, pos, state);
-        this.listener = new BetterVibrationListener(((BetterSculkSensorBlock)state.getBlock()).getRange(), this, null, 0.0F, 0, this);
+        this.listener = new BetterVibrationListener(((BetterSculkSensorBlock)state.getBlock()).getRange(), this, this);
     }
 
     public BetterVibrationListener getEventListener() {
