@@ -33,7 +33,7 @@ public class BetterVibrationListener extends VibrationListener {
     public void actualTick(World world) {
         if (world instanceof ServerWorld serverWorld) {
             if (this.vibration != null) {
-                this.callback.accept(serverWorld, this, new BlockPos(this.vibration.pos), this.vibration.gameEvent, this.vibration.getEntity(serverWorld).orElse(null), this.vibration.getOwner(serverWorld).orElse(null), this.getRange());
+                this.callback.accept(serverWorld, this, BlockPos.ofFloored(this.vibration.pos), this.vibration.gameEvent, this.vibration.getEntity(serverWorld).orElse(null), this.vibration.getOwner(serverWorld).orElse(null), this.getRange());
                 this.vibration = null;
             }
         }
@@ -62,7 +62,7 @@ public class BetterVibrationListener extends VibrationListener {
             return false;
         }
         Vec3d vec3d2 = optional.get();
-        if (!this.callback.accepts(world, this, new BlockPos(emmiterPos), event, emitter)) {
+        if (!this.callback.accepts(world, this, BlockPos.ofFloored(emmiterPos), event, emitter)) {
             return false;
         }
         if (isOccluded(world, emmiterPos, vec3d2)) {
