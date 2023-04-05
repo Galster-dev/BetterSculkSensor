@@ -83,13 +83,16 @@ public class BetterVibrationListener extends VibrationListener {
     }
 
     private static boolean isOccluded(World world, Vec3d start, Vec3d end) {
-        Vec3d vec3d = new Vec3d((double) MathHelper.floor(start.x) + 0.5, (double)MathHelper.floor(start.y) + 0.5, (double)MathHelper.floor(start.z) + 0.5);
-        Vec3d vec3d2 = new Vec3d((double)MathHelper.floor(end.x) + 0.5, (double)MathHelper.floor(end.y) + 0.5, (double)MathHelper.floor(end.z) + 0.5);
-        for (Direction direction : Direction.values()) {
-            Vec3d vec3d3 = vec3d.withBias(direction, 1.0E-5f);
-            if (world.raycast(new BlockStateRaycastContext(vec3d3, vec3d2, state -> state.isIn(BlockTags.OCCLUDES_VIBRATION_SIGNALS))).getType() == HitResult.Type.BLOCK) continue;
-            return false;
+        Vec3d startPos = new Vec3d((double)MathHelper.floor(start.x) + 0.5, (double)MathHelper.floor(start.y) + 0.5, (double)MathHelper.floor(start.z) + 0.5);
+        Vec3d endPos = new Vec3d((double)MathHelper.floor(end.x) + 0.5, (double)MathHelper.floor(end.y) + 0.5, (double)MathHelper.floor(end.z) + 0.5);
+
+        for(var direction : Direction.values()) {
+            Vec3d vec3d3 = startPos.offset(direction, 9.999999747378752E-6);
+            if (world.raycast(new BlockStateRaycastContext(vec3d3, endPos, (state) -> state.isIn(BlockTags.OCCLUDES_VIBRATION_SIGNALS))).getType() != HitResult.Type.BLOCK) {
+                return false;
+            }
         }
+
         return true;
     }
 
